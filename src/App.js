@@ -14,7 +14,8 @@ class App extends Component {
   componentDidMount() {
     fetch(`http://localhost:3001/api/v1/users/${this.state.user}/fave_trains/1`)
     .then(res => res.json())
-    .then( res => console.log(res))
+    .then(res => console.log(res.entity))
+
   }
 
   render() {
