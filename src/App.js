@@ -76,6 +76,7 @@ class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Redirect to="/404" />
         </Switch>
+        <Dashboard userId="13"/>
       </div>
     );
   }
