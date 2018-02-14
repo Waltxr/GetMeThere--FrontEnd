@@ -22,7 +22,6 @@ const HomePage = (props) => {
 class App extends Component {
 
   state = {
-    savedTrains: ['G'],
     trains: [],
     selectedTrain: {
       route: null
@@ -67,6 +66,8 @@ class App extends Component {
     window.history.pushState({}, null, "/login")
   }
 
+
+
   componentDidMount() {
     const token = localStorage.getItem('token')
     if (token) {
@@ -82,7 +83,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.auth.currentUser)
     return (
       <div className="App">
         <Navbar currentUser={this.state.auth.currentUser} logOut={this.removeLoggedInUser} />
@@ -98,12 +98,14 @@ class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Redirect to="/404" />
         </Switch>
-        <SelectTrain getTrain={this.getTrain}></SelectTrain>
-        <TrainDetails trains={this.state.trains} />
-        {this.state.auth.currentUser ? <Dashboard userId={this.state.auth.currentUser.id}/>: ""}
+        <div>
+          {this.state.auth.currentUser ? <Dashboard userId={this.state.auth.currentUser.id}/>: ''}
+        </div>
       </div>
     );
   }
 }
+
+
 
 export default App;
