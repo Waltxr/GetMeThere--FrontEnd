@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './materialize.css'
 
 import Navbar from './nav/Navbar'
 import Login from './nav/Login'

@@ -12,20 +12,28 @@ class Dashboard extends React.Component {
 
 
   componentDidMount() {
+    if (this.state.userId) {
     fetch(`http://localhost:3001/api/v1/users/${this.state.userId}/fave_trains`)
     .then(res => res.json())
-    .then(res => this.setState((prevState) => {return {fave_trains: [...prevState.fave_trains, res]}}))
+    .then(res => this.setState((prevState) => {return {fave_trains: [...prevState.fave_trains, ...res]}}))
+    }
   }
 
 
   render() {
-    console.log(this.state.fave_trains)
     const allFaves =
       this.state.fave_trains.map( (ft) => {return <TrainCard train={ft}></TrainCard>})
 
     return(
-      <div>
+      <div className="dashboard" style={{display:'grid', gridTemplateColumns:'1fr 1fr'}}>
+        <div>
         {allFaves}
+        </div>
+        <div>
+          This is where the choose train section will go 
+        </div>
+
+
       </div>
     )
   }
