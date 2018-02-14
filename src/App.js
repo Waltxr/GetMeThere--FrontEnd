@@ -22,7 +22,6 @@ const HomePage = (props) => {
 class App extends Component {
 
   state = {
-    savedTrains: ['G'],
     trains: [],
     selectedTrain: {
       route: null
@@ -70,6 +69,8 @@ class App extends Component {
     window.history.pushState({}, null, "/login")
   }
 
+
+
   componentDidMount() {
     const token = localStorage.getItem('token')
     if (token) {
@@ -100,8 +101,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("render app")
-    console.log(this.state.auth.currentUser)
     return (
       <div className="App">
         <Navbar currentUser={this.state.auth.currentUser} logOut={this.removeLoggedInUser} />
@@ -134,5 +133,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default App;

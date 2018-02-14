@@ -20,19 +20,24 @@ class Dashboard extends React.Component {
     }
   }
 
+  removeFave = (faveTrainId) => {
+      let index = this.state.fave_trains.findIndex( ft => ft.id === faveTrainId)
+      let x = this.state.fave_trains
+      x.splice( this.state.fave_trains.indexOf(index), 1)
+      this.setState({fave_trains: x})
+      fetch(`http://localhost:3001/api/v1/users/${this.state.userId}/fave_trains/${faveTrainId}`, {
+      method: 'delete'
+    })
+  }
+
+
 
   render() {
     const allFaves =
-      this.state.fave_trains.map( (ft) => {return <TrainCard key={ft} train={ft}></TrainCard>})
-
+      this.state.fave_trains.map( (ft) => {return <TrainCard key={ft} train={ft} addRemove={this.removeFave}></TrainCard>})
     return(
-      <div className="dashboard" style={{display:'grid', gridTemplateColumns:'1fr 1fr'}}>
-        <div>
+      <div className="dashboard">
         {allFaves}
-        </div>
-        <div>
-          This is where the choose train section will go
-        </div>
       </div>
     )
   }

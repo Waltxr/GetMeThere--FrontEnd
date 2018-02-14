@@ -4843,10 +4843,13 @@ small {
   top: 0;
   bottom: 0;
   width: 100%;
+  opacity: 0.7;
+
+
 }
 
 .card .card-image .card-title {
-  color: #fff;
+  color: black;
   position: absolute;
   bottom: 0;
   left: 0;
