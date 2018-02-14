@@ -6,27 +6,25 @@ import React from 'react'
 
 const TrainCard  = ({train}) => {
 
-  const times = train.times.sort( (a,b) => {return a-b}).map( (t) => {return <li>{t} min</li>})
+  const times = train.times.sort( (a,b) => {return a-b}).map( (t) => {return <p>{t} min</p>})
 
   return (
-
-    <div class="card">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="https://storybookstorage.s3.amazonaws.com/items/images/000/324/956/original/20160403-9-1qrhqzt.jpg?1459717018"></img>
-      </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right"></i></span>
-        <p><a href="#">This is a link</a></p>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>
-            <h4>arriving in: </h4>
-            {times}
-        </p>
-      </div>
-    </div>
-
+    <div class="row">
+         <div class="col s12 m7">
+           <div class="card">
+             <div class="card-image">
+               <img src="https://cdn.vectorstock.com/i/1000x1000/82/86/people-using-smartphone-phones-in-subway-train-vector-10208286.jpg"></img>
+               <span class="card-title">{train.line} train @ {train.regular}, going {train.direction}</span>
+             </div>
+             <div class="card-content">
+                <h5>arriving in:</h5><h3>  {times}</h3>
+             </div>
+             <div class="card-action">
+               <a href="#">This is a link</a>
+             </div>
+           </div>
+         </div>
+       </div>
 
 
 

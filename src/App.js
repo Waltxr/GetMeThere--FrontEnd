@@ -82,6 +82,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.auth.currentUser)
     return (
       <div className="App">
         <Navbar currentUser={this.state.auth.currentUser} logOut={this.removeLoggedInUser} />
@@ -99,6 +100,7 @@ class App extends Component {
         </Switch>
         <SelectTrain getTrain={this.getTrain}></SelectTrain>
         <TrainDetails trains={this.state.trains} />
+        {this.state.auth.currentUser ? <Dashboard userId={this.state.auth.currentUser.id}/>: "no user"}
       </div>
     );
   }

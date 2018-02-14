@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
 
   render() {
     const allFaves =
-      this.state.fave_trains.map( (ft) => {return <TrainCard train={ft}></TrainCard>})
+      this.state.fave_trains.map( (ft) => {return <TrainCard key={ft} train={ft}></TrainCard>})
 
     return(
       <div className="dashboard" style={{display:'grid', gridTemplateColumns:'1fr 1fr'}}>
@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
         {allFaves}
         </div>
         <div>
-          This is where the choose train section will go 
+          This is where the choose train section will go
         </div>
 
 
