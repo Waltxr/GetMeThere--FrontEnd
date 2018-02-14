@@ -8,8 +8,8 @@ class SelectTrain extends React.Component {
 
   render() {
     return(
-      <form onSubmit={this.props.getTrain}>
-        <select >
+      <div>
+        <select style={{display: 'block'}} onChange={this.props.getTrain}>
           <option name="1 Train" value="1">1 Train</option>
           <option name="2 Train" value="2">2 Train</option>
           <option name="3 Train" value="3">3 Train</option>
@@ -34,8 +34,7 @@ class SelectTrain extends React.Component {
           <option name="Z Train" value="Z">Z Train</option>
           <option name="7 Train" value="7">7 Train</option>
         </select>
-        <input type="submit"></input>
-      </form>
+      </div>
     )
   }
 }

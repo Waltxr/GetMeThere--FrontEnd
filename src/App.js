@@ -100,7 +100,7 @@ class App extends Component {
         </Switch>
         <SelectTrain getTrain={this.getTrain}></SelectTrain>
         <TrainDetails trains={this.state.trains} />
-        {this.state.auth.currentUser ? <Dashboard userId={this.state.auth.currentUser.id}/>: "no user"}
+        {this.state.auth.currentUser ? <Dashboard userId={this.state.auth.currentUser.id}/>: ""}
       </div>
     );
   }
