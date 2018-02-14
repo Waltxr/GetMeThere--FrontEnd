@@ -1,4 +1,6 @@
 import React from 'react'
+import { Redirect } from 'react-router'
+import WithAuth from '../hoc/WithAuth'
 
 class SelectTrain extends React.Component {
 
@@ -39,4 +41,4 @@ class SelectTrain extends React.Component {
   }
 }
 
-export default SelectTrain
+export default WithAuth(SelectTrain)

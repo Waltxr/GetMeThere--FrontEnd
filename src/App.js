@@ -28,7 +28,8 @@ class App extends Component {
       route: null
     },
     auth: {
-      currentUser: null
+      currentUser: null,
+      loggingIn: true
     },
   }
 
@@ -55,14 +56,16 @@ class App extends Component {
       auth: { currentUser: {
         username: user.username,
         id: user.id
-      }}
+      },
+      logingIn: false
+      }
     })
   }
 
   removeLoggedInUser = () => {
     localStorage.removeItem('token')
     this.setState({
-      auth: { currentUser: null }
+      auth: { currentUser: null, loggingIn: false }
     })
     window.history.pushState({}, null, "/login")
   }
@@ -72,16 +75,32 @@ class App extends Component {
     if (token) {
       api.auth.getLoggedInUser().then(user => {
         if (user) {
-          this.setState({ auth: { currentUser: user } })
+          this.setState({
+            auth: {
+              currentUser: {
+                username: user.username,
+                id: user.id
+              },
+              loggingIn: false
+          } })
+          console.log(`user: ${user.username}`)
         } else {
-          this.setState({ auth: { currentUser: null } })
+          this.setState({ auth: {
+            currentUser: null,
+            loggingIn: false
+          } })
         }
       })
     } else {
+      this.setState({
+        auth: { loggingIn: false }
+      })
+      console.log('no token!')
     }
   }
 
   render() {
+    console.log("render app")
     console.log(this.state.auth.currentUser)
     return (
       <div className="App">
@@ -93,14 +112,24 @@ class App extends Component {
         <Route path ="/signup" render={ (routerProps) => {
             return <Signup history={routerProps.history} />
           }} />
-          <Route path="/404" component={CatchAll} />
+        <Route path="/dashboard" render={ (routerProps) => {
+            return <Dashboard history={routerProps.history} auth={this.state.auth} userId={this.state.auth.currentUser}/>
+          }} />
+        <Route path="/select-train" render={ (routerProps) => {
+            return (
+              <div>
+                <SelectTrain getTrain={this.getTrain} auth={this.state.auth}/>
+                <TrainDetails trains={this.state.trains} auth={this.state.auth}/>
+              </div>
+            )
+          } }/>
+          <Route path="/404" render={ (routerProps) => {
+              return <CatchAll auth={this.state.auth} />
+            } } />
           <Redirect from="/home" to="/" />
           <Route exact path="/" component={HomePage} />
           <Redirect to="/404" />
         </Switch>
-        <SelectTrain getTrain={this.getTrain}></SelectTrain>
-        <TrainDetails trains={this.state.trains} />
-        {this.state.auth.currentUser ? <Dashboard userId={this.state.auth.currentUser.id}/>: ""}
       </div>
     );
   }
