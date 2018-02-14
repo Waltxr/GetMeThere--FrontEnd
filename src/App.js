@@ -5,15 +5,17 @@ import Navbar from './nav/Navbar'
 import Login from './nav/Login'
 import api from './service/api'
 import Dashboard from './components/Dashboard'
+import SelectTrain from './components/SelectTrain'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import Signup from './nav/Signup'
+import TrainDetails from './components/TrainDetails'
 
 const CatchAll = (props) => {
   return (<h1> 404 ALERT </h1>)
 }
 
 const HomePage = (props) => {
-  return (<h1> WELCOME TO GET ME THERE </h1>)
+  return (<h1>WELCOME TO GET ME THERE</h1>)
 }
 
 class App extends Component {
@@ -21,9 +23,29 @@ class App extends Component {
   state = {
     savedTrains: ['G'],
     trains: [],
+    selectedTrain: {
+      route: null
+    },
     auth: {
       currentUser: null
-    }
+    },
+  }
+
+  selectTrain = (event) => {
+    this.setState({
+      selectedTrain: {
+        route: event.target.value
+      }
+    })
+  }
+
+  getTrain = (event) => {
+    event.preventDefault()
+    fetch(`http://localhost:3001//api/v1/trains/G`)
+    .then(res => res.json())
+    .then(j => this.setState({
+      trains: j
+    }))
   }
 
   setLoggedInUser = (user) => {
@@ -50,13 +72,11 @@ class App extends Component {
       api.auth.getLoggedInUser().then(user => {
         if (user) {
           this.setState({ auth: { currentUser: user } })
-          console.log(`user: ${user.username}`)
         } else {
           this.setState({ auth: { currentUser: null } })
         }
       })
     } else {
-      console.log('no token!')
     }
   }
 
@@ -76,6 +96,8 @@ class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Redirect to="/404" />
         </Switch>
+        <SelectTrain getTrain={this.getTrain}></SelectTrain>
+        <TrainDetails trains={this.state.trains} />
       </div>
     );
   }
