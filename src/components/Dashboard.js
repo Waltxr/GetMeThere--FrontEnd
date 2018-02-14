@@ -1,5 +1,7 @@
 import React from 'react'
+import { Redirect } from 'react-router'
 import TrainCard from './TrainCard'
+import WithAuth from '../hoc/WithAuth'
 
 
 class Dashboard extends React.Component {
@@ -8,7 +10,6 @@ class Dashboard extends React.Component {
     userId: this.props.userId,
     fave_trains: []
   }
-
 
 
   componentDidMount() {
@@ -43,4 +44,4 @@ class Dashboard extends React.Component {
 
 }
 
-export default Dashboard
+export default WithAuth(Dashboard)

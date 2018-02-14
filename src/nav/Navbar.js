@@ -15,6 +15,9 @@ const Navbar = (props) => {
             <li><Link to="/login">Login</Link></li>
           }
           <li><Link to="/signup">Sign Up</Link></li>
+          {loggedIn &&
+          <li><Link to="/select-train">Select Train</Link></li>  
+          }
         </ul>
       </div>
     </nav>
